@@ -1,7 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-@ObjectType()
 @Schema()
 export class Item {
     @Field(() => String)

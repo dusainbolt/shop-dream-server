@@ -60,7 +60,7 @@ enum Role {
 }
 
 type Store {
-  createBy: String!
+  createBy: User!
   descriptionLogo: String!
   email: String!
   endPackageAt: DateTime!
@@ -68,7 +68,7 @@ type Store {
   logo: String!
   logoName: String!
   name: String!
-  package: String!
+  package: Package!
   status: StoreStatus!
   storeContact: StoreContact!
   storeSocial: StoreSocial!

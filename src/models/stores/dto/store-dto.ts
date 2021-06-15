@@ -1,8 +1,10 @@
+import { Package } from './../../package/dto/package-dto';
 import { StoreStatus } from './store-enum';
 import { IsEmail } from 'class-validator';
 import { Schema as MongooseSchema } from 'mongoose';
 import { ID, ObjectType, Field, InputType } from '@nestjs/graphql';
 import { Theme } from 'src/models/theme/dto/theme-dto';
+import { User } from 'src/models/users/dto/user-dto';
 
 @ObjectType('StoreContact')
 @InputType('StoreContactInput')
@@ -64,13 +66,13 @@ export class Store {
     @Field()
     storeSocial: StoreSocial;
 
-    @Field()
+    @Field(() => User)
     createBy: string;
 
     @Field(() => Theme)
     theme: string;
 
-    @Field()
+    @Field(() => Package)
     package: string;
 
     @Field(() => StoreStatus)

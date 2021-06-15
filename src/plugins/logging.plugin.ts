@@ -1,4 +1,4 @@
-import { UserHashToken } from './../models/users/dto/user-hash-token';
+import { UserHashToken } from '../models/users/dto/user-hash-token';
 import { ConfigService } from '@nestjs/config';
 import { HashService } from './../hash/hash.service';
 import { Logger } from '@nestjs/common';
@@ -60,7 +60,7 @@ export class LoggingPlugin implements ApolloServerPlugin {
         const { req } = service.context;
 
         // Validate & log request if production
-        if ((req.headers && this.configService.get('NODE_ENV') !== 'local')) {
+        if (req.headers && this.configService.get('NODE_ENV') !== 'local') {
             // get time server
             const timeServer = Math.floor(Date.now() / 1000);
             // handle validate

@@ -1,7 +1,6 @@
 import { Field, ObjectType, InputType, ID } from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
 import { PackageStatus } from './package-enum';
-
 @ObjectType()
 export class Package {
     @Field(() => ID)

@@ -1,3 +1,5 @@
+import { BannerModule } from './banner/banner.module';
+import { BannerService } from './banner/banner.service';
 import { urlInitFont } from './font/font.schema';
 import { PackageService } from './package/package.service';
 import { Package, initPackage } from './package/dto/package-dto';
@@ -17,7 +19,7 @@ import { FontService } from './font/font.service';
 import { Theme, initTheme } from './theme/dto/theme-dto';
 import { InitStore, Store } from './stores/dto/store-dto';
 @Module({
-    imports: [UsersModule, StoresModule, ThemeModule, FontModule, PackageModule],
+    imports: [UsersModule, StoresModule, ThemeModule, FontModule, PackageModule, BannerModule],
 })
 export class ModelsModule {
     constructor(
@@ -25,7 +27,8 @@ export class ModelsModule {
         private storesService: StoresService,
         private themeService: ThemeService,
         private fontService: FontService,
-        private packageService: PackageService
+        private packageService: PackageService,
+        private bannerService: BannerService
     ) {
         this.initData();
     }
@@ -108,6 +111,16 @@ export class ModelsModule {
         return new this.storesService.storeModel(data).save();
     }
 
+    async initBanner(ownerId, storeId): Promise<Banner> {
+        const data: initBanner = {
+            url: 'https://scontent-hkt1-2.xx.fbcdn.net/v/t1.6435-9/194656658_123219826606300_1831290497174703061_n.jpg?_nc_cat=107&ccb=1-3&_nc_sid=dbeb18&_nc_ohc=2pVtKurD3FMAX9H_aeg&_nc_ht=scontent-hkt1-2.xx&oh=dcfc3deb8f41ad9183ee2168497c66ab&oe=60CDC590',
+            order: 1,
+            createBy: ownerId,
+            storeOwner: storeId,
+        };
+        return new this.bannerService.bannerModel(data).save();
+    }
+
     async initData() {
         const users = await this.usersService.userModel.find();
         if (!users.length) {
@@ -130,6 +143,9 @@ export class ModelsModule {
             // create store
             const storeCreate = await this.initStore(userCreate.id, themeCreate.id, packageCreate.id);
             console.log(themeCreate);
+
+            //create banner
+            const bannerCreate = await this.initBanner(userCreate.id, storeCreate.id);
         }
     }
 }

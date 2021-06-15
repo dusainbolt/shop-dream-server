@@ -1,4 +1,4 @@
-import { PackageService } from './../package/package.service';
+import { PackageService } from '../package/package.service';
 import { User } from 'src/models/users/dto/user-dto';
 import { Logger } from '@nestjs/common';
 import { UsersService } from './users.service';

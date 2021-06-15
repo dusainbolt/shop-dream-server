@@ -1,6 +1,5 @@
 import { ThemeStatus } from './theme-enum';
 import { Field, ObjectType, InputType, ID } from '@nestjs/graphql';
-import { Schema as MongooseSchema } from 'mongoose';
 import { Font } from 'src/models/font/dto/font-dto';
 
 @ObjectType()

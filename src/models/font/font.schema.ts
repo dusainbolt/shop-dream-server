@@ -2,7 +2,6 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { USER_NAME } from '../users/users.schema';
 import { FontStatus } from './dto/font-enum';
-
 @Schema({ timestamps: true })
 export class FontModel {
     @Prop({ unique: true, required: true })
