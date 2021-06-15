@@ -2,6 +2,7 @@ import { StoreStatus } from './store-enum';
 import { IsEmail } from 'class-validator';
 import { Schema as MongooseSchema } from 'mongoose';
 import { ID, ObjectType, Field, InputType } from '@nestjs/graphql';
+import { Theme } from 'src/models/theme/dto/theme-dto';
 
 @ObjectType('StoreContact')
 @InputType('StoreContactInput')
@@ -10,8 +11,6 @@ export class StoreContact {
     hotline: string;
     @Field()
     phone: string;
-    @Field()
-    areaCode: string;
     @Field()
     address: string;
     @Field(() => [String])
@@ -42,7 +41,7 @@ export class StoreSocial {
 @ObjectType()
 export class Store {
     @Field(() => ID)
-    readonly id: string;
+    readonly id?: string;
 
     @Field()
     email: string;
@@ -52,9 +51,6 @@ export class Store {
 
     @Field()
     logo: string;
-
-    @Field()
-    avatar: string;
 
     @Field()
     logoName: string;
@@ -68,17 +64,20 @@ export class Store {
     @Field()
     storeSocial: StoreSocial;
 
-    @Field(() => String)
-    createBy: MongooseSchema.Types.ObjectId;
+    @Field()
+    createBy: string;
 
-    @Field(() => String)
-    theme: MongooseSchema.Types.ObjectId;
+    @Field(() => Theme)
+    theme: string;
 
-    @Field(() => String)
-    package: MongooseSchema.Types.ObjectId;
+    @Field()
+    package: string;
 
     @Field(() => StoreStatus)
     status: StoreStatus;
+
+    @Field()
+    endPackageAt: Date;
 
     @Field()
     trial: boolean;
@@ -117,7 +116,7 @@ export class InitStore {
     package: string;
 
     @Field()
-    status: StoreStatus;
+    endPackageAt: Date;
 
     @Field()
     trial: boolean;

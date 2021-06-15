@@ -29,7 +29,7 @@ enum Gender {
   MALE @deprecated(reason: "This is male")
 }
 
-type PackageDTO {
+type Package {
   createBy: String!
   createdAt: DateTime!
   id: ID!
@@ -47,7 +47,8 @@ enum PackageStatus {
 }
 
 type Query {
-  packages: [PackageDTO!]!
+  packages: [Package!]!
+  store(storeId: String!): Store!
   themes: [Theme!]!
   users: [User!]!
 }
@@ -58,9 +59,25 @@ enum Role {
   USER @deprecated(reason: "This is user")
 }
 
+type Store {
+  createBy: String!
+  descriptionLogo: String!
+  email: String!
+  endPackageAt: DateTime!
+  id: ID!
+  logo: String!
+  logoName: String!
+  name: String!
+  package: String!
+  status: StoreStatus!
+  storeContact: StoreContact!
+  storeSocial: StoreSocial!
+  theme: Theme!
+  trial: Boolean!
+}
+
 type StoreContact {
   address: String!
-  areaCode: String!
   branchAddress: [String!]!
   closeHours: String!
   hotline: String!
@@ -70,7 +87,6 @@ type StoreContact {
 
 input StoreContactInput {
   address: String!
-  areaCode: String!
   branchAddress: [String!]!
   closeHours: String!
   hotline: String!
@@ -94,6 +110,12 @@ input StoreSocialInput {
   twitter: String!
   youtube: String!
   zalo: String!
+}
+
+"""The status store."""
+enum StoreStatus {
+  ACTIVE @deprecated(reason: "This is store active")
+  INACTIVE @deprecated(reason: "This is store not renew")
 }
 
 type Theme {

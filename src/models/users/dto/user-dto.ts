@@ -1,4 +1,4 @@
-import { PackageDTO } from './../../package/dto/package-dto';
+import { Package } from './../../package/dto/package-dto';
 import { lengthMessage } from './../../../common/valid_message';
 import { IsEmail, Length } from 'class-validator';
 import { Field, ObjectType, ID, InputType } from '@nestjs/graphql';

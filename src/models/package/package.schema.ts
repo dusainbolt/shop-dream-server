@@ -5,7 +5,6 @@ import { USER_NAME } from '../users/users.schema';
 import { PackageStatus } from './dto/package-enum';
 
 @Schema({ timestamps: true })
-@ObjectType()
 export class PackageModel {
     @Prop({ required: true })
     name: string;

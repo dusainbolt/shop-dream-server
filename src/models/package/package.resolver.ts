@@ -1,13 +1,13 @@
 import { PackageService } from './package.service';
-import { PackageDTO } from './dto/package-dto';
+import { Package } from './dto/package-dto';
 import { Resolver, Query } from '@nestjs/graphql';
 
-@Resolver(() => PackageDTO)
+@Resolver(() => Package)
 export class PackageResolver {
     constructor(private readonly packageService: PackageService) {}
 
-    @Query(() => [PackageDTO])
-    async packages(): Promise<PackageDTO[]> {
+    @Query(() => [Package])
+    async packages(): Promise<Package[]> {
         return this.packageService.findAll();
     }
 
