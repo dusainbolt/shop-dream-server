@@ -1,0 +1,138 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Font {
+  createBy: String!
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  status: FontStatus!
+  updatedAt: DateTime!
+  url: String!
+}
+
+"""The status font."""
+enum FontStatus {
+  ACTIVE @deprecated(reason: "This is font active by ADMIN")
+  INACTIVE @deprecated(reason: "This is font inactive by ADMIN")
+}
+
+"""The gender of user"""
+enum Gender {
+  FEMALE @deprecated(reason: "This is female")
+  MALE @deprecated(reason: "This is male")
+}
+
+type PackageDTO {
+  createBy: String!
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  period: Float!
+  price: Float!
+  status: PackageStatus!
+  updatedAt: DateTime!
+}
+
+"""The status package."""
+enum PackageStatus {
+  ACTIVE @deprecated(reason: "This is package active by ADMIN")
+  INACTIVE @deprecated(reason: "This is package inactive by ADMIN")
+}
+
+type Query {
+  packages: [PackageDTO!]!
+  themes: [Theme!]!
+  users: [User!]!
+}
+
+"""The role of user"""
+enum Role {
+  ADMIN @deprecated(reason: "This is admin")
+  USER @deprecated(reason: "This is user")
+}
+
+type StoreContact {
+  address: String!
+  areaCode: String!
+  branchAddress: [String!]!
+  closeHours: String!
+  hotline: String!
+  openingHours: String!
+  phone: String!
+}
+
+input StoreContactInput {
+  address: String!
+  areaCode: String!
+  branchAddress: [String!]!
+  closeHours: String!
+  hotline: String!
+  openingHours: String!
+  phone: String!
+}
+
+type StoreSocial {
+  facebookPage: String!
+  instagram: String!
+  tiktok: String!
+  twitter: String!
+  youtube: String!
+  zalo: String!
+}
+
+input StoreSocialInput {
+  facebookPage: String!
+  instagram: String!
+  tiktok: String!
+  twitter: String!
+  youtube: String!
+  zalo: String!
+}
+
+type Theme {
+  backgroundColor: String!
+  createBy: String!
+  createdAt: DateTime!
+  font: Font!
+  id: ID!
+  name: String!
+  status: ThemeStatus!
+  updatedAt: DateTime!
+}
+
+"""The status theme."""
+enum ThemeStatus {
+  ACTIVE @deprecated(reason: "This is theme active by ADMIN")
+  INACTIVE @deprecated(reason: "This is theme inactive by ADMIN")
+}
+
+type User {
+  avatar: String!
+  createdAt: DateTime!
+  email: String!
+  facebook: String!
+  firstName: String!
+  gender: Gender!
+  id: ID!
+  lastName: String!
+  password: String!
+  phone: String!
+  role: Role!
+  status: UserStatus!
+  updatedAt: DateTime!
+}
+
+"""The status of user"""
+enum UserStatus {
+  ACTIVE @deprecated(reason: "This is active")
+  BLOCK @deprecated(reason: "This is block")
+  INACTIVE @deprecated(reason: "This is inactive")
+  PAUSE @deprecated(reason: "This is pause")
+}
