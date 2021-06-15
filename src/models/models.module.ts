@@ -1,6 +1,6 @@
 import { urlInitFont } from './font/font.schema';
 import { PackageService } from './package/package.service';
-import { PackageDTO, initPackageDTO } from './package/dto/package-dto';
+import { Package, initPackage } from './package/dto/package-dto';
 import { FontModule } from './font/font.module';
 import { ThemeModule } from './theme/theme.module';
 import { StoresService } from './stores/stores.service';
@@ -45,8 +45,8 @@ export class ModelsModule {
         return new this.usersService.userModel(data).save();
     }
 
-    async initPackage(ownerId: string): Promise<PackageDTO> {
-        const data: initPackageDTO = {
+    async initPackage(ownerId: string): Promise<Package> {
+        const data: initPackage = {
             name: 'Package Sliver',
             price: 399999,
             period: 30,
@@ -75,18 +75,38 @@ export class ModelsModule {
         return new this.themeService.themeModel(data).save();
     }
 
-    // async initStore(ownerId: string, fontId: string): Promise<Store> {
-    //     const data: InitStore = {
-    //         name: 'Sainbolt Store',
-    //         email: 'dulh181199@gmail.com',
-    //         // storesService: '',
-    //         // theme: ''
-    //         // createBy: ownerId,
-    //         // primaryColor: '#FB5831',
-    //         // font: fontId,
-    //     };
-    //     return new this.storesService.storeModel(data).save();
-    // }
+    async initStore(ownerId: string, themeId: string, packageId: string): Promise<Store> {
+        const data: InitStore = {
+            name: 'Sainbolt Store',
+            email: 'dulh181199@gmail.com',
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/RPC-JP_Logo.png',
+            logoName: 'Sainbolt',
+            createBy: ownerId,
+            descriptionLogo:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip...',
+            storeContact: {
+                hotline: '1900-1157',
+                phone: '0328111597',
+                address: '219 Trung Kính, Cầu Giấy, Hà Nội',
+                branchAddress: [],
+                openingHours: '7:00',
+                closeHours: '22:00',
+            },
+            storeSocial: {
+                facebookPage: 'https://www.facebook.com/sainboltapp',
+                tiktok: '',
+                zalo: 'https://zalo.me/0328111597',
+                youtube: 'https://www.youtube.com/channel/UCUPwDA86_PRWPDYvvOlj8IQ',
+                twitter: '',
+                instagram: '',
+            },
+            theme: themeId,
+            package: packageId,
+            endPackageAt: new Date(),
+            trial: true,
+        };
+        return new this.storesService.storeModel(data).save();
+    }
 
     async initData() {
         const users = await this.usersService.userModel.find();
@@ -107,9 +127,9 @@ export class ModelsModule {
             const themeCreate = await this.initTheme(userCreate.id, fontCreate.id);
             console.log(themeCreate);
 
-            //create theme
-            // const storeCreate = await this.initStore(userCreate.id, fontCreate.id);
-            // console.log(themeCreate);
+            // create store
+            const storeCreate = await this.initStore(userCreate.id, themeCreate.id, packageCreate.id);
+            console.log(themeCreate);
         }
     }
 }

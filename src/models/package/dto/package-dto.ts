@@ -3,7 +3,7 @@ import { Schema as MongooseSchema } from 'mongoose';
 import { PackageStatus } from './package-enum';
 
 @ObjectType()
-export class PackageDTO {
+export class Package {
     @Field(() => ID)
     id?: string;
 
@@ -30,7 +30,7 @@ export class PackageDTO {
 }
 
 @InputType()
-export class initPackageDTO {
+export class initPackage {
     @Field()
     name?: string;
 

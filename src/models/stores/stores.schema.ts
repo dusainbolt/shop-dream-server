@@ -1,12 +1,11 @@
 import { PACKAGE_NAME } from './../package/package.schema';
-import { ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { THEME_NAME } from '../theme/theme.schema';
 import { USER_NAME } from '../users/users.schema';
 import { StoreContact, StoreSocial } from './dto/store-dto';
+import { StoreStatus } from './dto/store-enum';
 @Schema({ timestamps: true })
-@ObjectType()
 export class StoreModel {
     @Prop({ required: true })
     name: string;
@@ -38,11 +37,11 @@ export class StoreModel {
     @Prop({ type: MongooseSchema.Types.ObjectId, ref: PACKAGE_NAME })
     package: string;
 
-    @Prop()
+    @Prop({ required: true })
     endPackageAt: Date;
 
-    @Prop()
-    status: string;
+    @Prop({ type: StoreStatus, default: StoreStatus.ACTIVE })
+    status: StoreStatus;
 
     @Prop()
     trial: boolean;
